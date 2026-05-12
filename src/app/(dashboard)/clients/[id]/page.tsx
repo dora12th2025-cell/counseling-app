@@ -11,7 +11,7 @@ export default async function ClientDetailPage({
   const supabase = await createClient()
 
   // 대상자 정보 가져오기
-  const { data: client, error: clientError } = await supabase
+  const { data: clientData, error: clientError } = await supabase
     .from('clients')
     .select(`
       *,
@@ -20,12 +20,14 @@ export default async function ClientDetailPage({
     .eq('id', id)
     .single()
 
+  const client = clientData as any
+
   if (clientError || !client) {
     notFound()
   }
 
   // 상담일지 목록 가져오기
-  const { data: sessions } = await supabase
+  const { data: sessionsData } = await supabase
     .from('sessions')
     .select(`
       *,
@@ -33,6 +35,8 @@ export default async function ClientDetailPage({
     `)
     .eq('client_id', id)
     .order('session_date', { ascending: false })
+    
+  const sessions = sessionsData as any[]
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-5xl mx-auto">

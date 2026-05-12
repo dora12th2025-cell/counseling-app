@@ -27,8 +27,7 @@ export async function createClientAction(formData: FormData) {
 
   if (error) {
     console.error('Error creating client:', error)
-    // TODO: better error handling
-    return { error: '대상자 등록에 실패했습니다. (' + error.message + ')' }
+    throw new Error('대상자 등록에 실패했습니다. (' + error.message + ')')
   }
 
   revalidatePath('/clients')

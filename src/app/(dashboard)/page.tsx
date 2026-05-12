@@ -13,7 +13,7 @@ export default async function DashboardPage() {
     .select('*', { count: 'exact', head: true })
 
   // 최근 상담 내역 가져오기
-  const { data: recentSessions } = await supabase
+  const { data: recentSessionsData } = await supabase
     .from('sessions')
     .select(`
       id,
@@ -23,6 +23,8 @@ export default async function DashboardPage() {
     `)
     .order('session_date', { ascending: false })
     .limit(5)
+    
+  const recentSessions = recentSessionsData as any[]
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">

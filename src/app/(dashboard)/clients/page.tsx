@@ -22,7 +22,8 @@ export default async function ClientsPage({
     request = request.ilike('name', `%${query}%`)
   }
 
-  const { data: clients, error } = await request
+  const { data: clientsData, error } = await request
+  const clients = clientsData as any[]
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">

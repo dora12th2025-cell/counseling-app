@@ -27,7 +27,7 @@ export async function createSessionAction(formData: FormData) {
 
   if (error) {
     console.error('Error creating session:', error)
-    return { error: '상담일지 등록에 실패했습니다.' }
+    throw new Error('상담일지 등록에 실패했습니다.')
   }
 
   revalidatePath(`/clients/${client_id}`)
