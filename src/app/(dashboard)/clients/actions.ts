@@ -23,7 +23,7 @@ export async function createClientAction(formData: FormData) {
     birth_date: birth_date || null,
     address: address || null,
     created_by: userData.user.id,
-  })
+  } as any)
 
   if (error) {
     console.error('Error creating client:', error)
